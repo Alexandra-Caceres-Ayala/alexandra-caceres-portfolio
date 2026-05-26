@@ -6,304 +6,286 @@
     <title>Alexandra Cáceres | Data Analyst</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <style>
         :root {
-            --bg-dark: #071120; /* Aún más oscuro para mayor contraste */
-            --bg-card: rgba(17, 34, 64, 0.7);
-            --primary: #64ffda; 
-            --primary-glow: rgba(100, 255, 218, 0.4);
-            --text-main: #8892b0;
-            --text-light: #ccd6f6;
-            --transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+            /* Paleta Tech Elegante & Femenina */
+            --bg-color: #171020; /* Morado/Ciruela ultra oscuro */
+            --primary: #ff8fa3; /* Rosa suave / Rose gold */
+            --secondary: #c9a0dc; /* Lavanda */
+            --text-main: #d8c3d6; /* Gris rosado para lectura */
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-dark);
+            background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            padding: 0 20px;
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
         }
 
-        /* Resplandor de fondo animado */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 50vw;
-            height: 50vh;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
-            filter: blur(100px);
-            z-index: -1;
-            animation: pulse 8s infinite alternate;
+        /* FONDO ANIMADO CÁLIDO */
+        .background-blobs {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden; background: var(--bg-color);
         }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 60px 0;
+        .blob {
+            position: absolute; filter: blur(90px); opacity: 0.5;
+            animation: float 20s infinite alternate;
         }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(255,143,163,0.3) 0%, rgba(0,0,0,0) 70%); }
+        .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(201,160,220,0.2) 0%, rgba(0,0,0,0) 70%); animation-delay: -5s; }
+        
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10%, 10%) scale(1.2); } }
 
-        h1, h2, h3 { font-family: 'Outfit', sans-serif; color: var(--text-light); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HERO SECTION - AHORA A DOS COLUMNAS */
+        /* HERO SECTION DIVIDIDA */
         .hero {
-            min-height: 85vh;
+            min-height: 100vh;
             display: grid;
-            grid-template-columns: 1.2fr 1fr; /* Divide la pantalla */
-            gap: 50px;
+            grid-template-columns: 1fr 1fr;
             align-items: center;
+            gap: 40px;
+            padding-top: 60px;
         }
+        
+        .hero-content { z-index: 2; }
 
-        .hero-content {
-            z-index: 2;
-        }
-
-        .hero .greeting { 
-            color: var(--primary); 
-            font-family: 'Inter', monospace; 
-            margin-bottom: 20px; 
-            font-size: 16px;
-            display: inline-block;
-            background: rgba(100, 255, 218, 0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(100,255,218,0.2);
-        }
-
-        /* Degradado en el nombre */
-        .gradient-text {
-            font-size: clamp(45px, 6vw, 75px);
-            line-height: 1.1;
-            margin-bottom: 10px;
-            letter-spacing: -2px;
-            background: linear-gradient(90deg, #ccd6f6 0%, #64ffda 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero h2 { font-size: clamp(28px, 4vw, 45px); color: var(--text-main); margin-bottom: 30px; }
-        .hero p { max-width: 540px; font-size: 18px; margin-bottom: 40px; }
-
-        /* ELEMENTO VISUAL FLOTANTE (EL EFECTO WOW) */
-        .hero-visual {
+        /* IMAGEN DE PERFIL */
+        .hero-image-container {
             position: relative;
-            perspective: 1000px;
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 1;
         }
-
-        .glass-card {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 20px;
+        .hero-image-container img {
             width: 100%;
-            max-width: 350px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.5);
-            transform: rotateY(-15deg) rotateX(10deg);
-            animation: float 6s ease-in-out infinite;
+            max-width: 450px;
+            object-fit: cover;
+            /* Animación sutil de levitación */
+            animation: levitate 6s ease-in-out infinite;
+            filter: drop-shadow(0px 20px 30px rgba(0,0,0,0.5));
         }
-
-        .glass-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 15px;
-            color: var(--text-light);
-            font-family: 'Outfit', sans-serif;
+        /* Círculo brillante detrás de tu foto */
+        .glow-circle {
+            position: absolute;
+            width: 350px; height: 350px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
         }
+        @keyframes levitate { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
-        .glass-header i { color: var(--primary); }
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            padding: 8px 18px; border-radius: 30px; font-size: 13px;
+            backdrop-filter: blur(10px); margin-bottom: 25px;
+            color: var(--primary); letter-spacing: 1px;
+        }
+        .status-dot {
+            width: 8px; height: 8px; background-color: var(--primary);
+            border-radius: 50%; box-shadow: 0 0 10px var(--primary);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* Barras de datos animadas en CSS puro */
-        .data-row { margin-bottom: 15px; }
-        .data-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; color: #a8b2d1;}
-        .data-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
-        .data-bar-fill { height: 100%; background: linear-gradient(90deg, #233554, #64ffda); border-radius: 10px; position: relative;}
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 6vw, 75px);
+            color: var(--text-light); line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px;
+        }
+        .hero h1 span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
         
-        .fill-1 { width: 85%; animation: grow 2s ease-out forwards; }
-        .fill-2 { width: 62%; animation: grow 2.5s ease-out forwards; }
-        .fill-3 { width: 95%; animation: grow 3s ease-out forwards; }
+        .typing-text { font-size: clamp(20px, 3vw, 32px); color: var(--text-light); margin-bottom: 25px; min-height: 40px; font-weight: 300; }
+        .typing-text .cursor { display: inline-block; width: 3px; background-color: var(--primary); animation: blink 1s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* TECH PILLS */
-        .tech-stack { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
-        .tech-pill {
-            border: 1px solid rgba(100, 255, 218, 0.3);
-            color: var(--primary);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-family: monospace;
-            background: rgba(10, 25, 47, 0.5);
-            transition: var(--transition);
-        }
-        .tech-pill:hover {
-            background: rgba(100, 255, 218, 0.15);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
-            border-color: var(--primary);
-        }
+        .hero p { font-size: 17px; line-height: 1.8; margin-bottom: 35px; font-weight: 300; }
 
-        /* BOTONES */
-        .action-buttons { display: flex; gap: 20px; align-items: center; }
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
         .btn {
-            padding: 12px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: monospace;
-            font-size: 14px;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
         }
-        .btn-primary {
-            background-color: var(--primary);
-            color: #0a192f;
-            font-weight: bold;
+        .btn-glow {
+            background: linear-gradient(90deg, var(--primary), #e56b82);
+            color: #fff; border: none; box-shadow: 0 0 20px rgba(255, 143, 163, 0.4);
         }
-        .btn-primary:hover {
-            box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
-            transform: translateY(-2px);
+        .btn-glow:hover { box-shadow: 0 0 30px rgba(255, 143, 163, 0.6); transform: translateY(-3px); }
+        
+        .btn-glass {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-light); backdrop-filter: blur(10px);
         }
-        .btn-social { color: var(--text-light); font-size: 26px; }
-        .btn-social:hover { color: var(--primary); transform: translateY(-3px); }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
 
-        /* SECCIÓN DE PROYECTO */
-        .section-title {
-            display: flex; align-items: center; font-size: 28px; margin-bottom: 40px; white-space: nowrap;
+        /* SECCIÓN HERRAMIENTAS / LOGOS */
+        .tools-section { text-align: center; margin: 60px 0 100px 0; }
+        .tools-title { font-size: 16px; color: var(--text-main); margin-bottom: 25px; letter-spacing: 2px; text-transform: uppercase; }
+        .tools-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .tool-icon {
+            font-size: 45px; transition: transform 0.3s ease, filter 0.3s ease;
+            filter: grayscale(20%) opacity(0.8);
         }
-        .section-title::after {
-            content: ""; display: block; height: 1px; width: 100%; background: #233554; margin-left: 20px;
-        }
+        .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
+        /* Icono personalizado PowerBI ya que no está en Devicon */
+        .powerbi-icon { width: 45px; height: 45px; transition: all 0.3s ease; filter: grayscale(20%) opacity(0.8); }
+        .tool-icon:hover .powerbi-icon { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
 
-        .project-card {
-            background: #112240;
-            border-radius: 12px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            align-items: center;
-            border: 1px solid #233554;
-            transition: var(--transition);
-            margin-bottom: 100px;
+        /* SECCIÓN PROYECTO */
+        .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 36px; color: var(--text-light); margin-bottom: 40px; text-align: center; }
+        .glass-card {
+            background: rgba(25, 15, 30, 0.6); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px); border-radius: 24px; padding: 50px;
+            display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); margin-bottom: 80px; transition: all 0.3s ease;
         }
-        .project-card:hover { border-color: var(--primary); box-shadow: 0 10px 30px -15px rgba(100,255,218,0.2); }
+        .glass-card:hover { border-color: rgba(255, 143, 163, 0.3); transform: translateY(-5px); }
 
-        .dashboard-placeholder {
-            width: 100%; height: 400px; background: #020c1b; border-radius: 8px; display: flex; justify-content: center; align-items: center; border: 1px solid #233554;
-        }
-        .dashboard-placeholder i { font-size: 40px; color: var(--primary); opacity: 0.5; }
+        .project-tag { color: var(--primary); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
+        .project-title { font-size: 28px; color: white; margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif;}
+        
+        .tech-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
+        .chip { background: rgba(255, 143, 163, 0.1); color: var(--primary); padding: 8px 16px; border-radius: 20px; font-size: 13px; border: 1px solid rgba(255, 143, 163, 0.2); }
 
-        /* ANIMACIONES */
-        @keyframes float {
-            0% { transform: rotateY(-15deg) rotateX(10deg) translateY(0px); }
-            50% { transform: rotateY(-15deg) rotateX(10deg) translateY(-20px); }
-            100% { transform: rotateY(-15deg) rotateX(10deg) translateY(0px); }
+        .dashboard-container {
+            width: 100%; height: 450px; background: #0b0710; border-radius: 16px;
+            border: 1px solid var(--glass-border); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden;
         }
-        @keyframes pulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.2); }
+        .dashboard-container::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--primary);
+            box-shadow: 0 0 20px var(--primary); animation: scan 3s linear infinite; opacity: 0.4;
         }
-        @keyframes grow {
-            from { width: 0; }
-        }
-        .fade-in { animation: fadeInUp 1s ease forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        .delay-1 { animation-delay: 0.2s; } .delay-2 { animation-delay: 0.4s; }
+        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
 
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            .hero { grid-template-columns: 1fr; text-align: left; }
-            .hero-visual { display: none; /* Ocultamos el efecto 3D en móviles para limpiar la vista */ }
-            .project-card { grid-template-columns: 1fr; padding: 25px; }
-            body::before { display: none; }
+        @media (max-width: 960px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+            .hero-content { order: 2; }
+            .hero-image-container { order: 1; margin-bottom: 20px; }
+            .hero-image-container img { max-width: 300px; }
+            .btn-group { justify-content: center; }
+            .glass-card { grid-template-columns: 1fr; padding: 30px; }
+            .dashboard-container { height: 350px; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header class="hero">
-        <div class="hero-content fade-in">
-            <div class="greeting"><i class="fa-solid fa-terminal"></i> data_analyst_profile.exe</div>
-            <h1 class="gradient-text">Alexandra Cáceres Ayala.</h1>
-            <h2>Transformo datos en decisiones.</h2>
-            <p>Especializada en extraer insights accionables a través de <strong>SQL, Python y Power BI</strong>. Conecto los hallazgos técnicos directamente con los objetivos de negocio para optimizar métricas operativas.</p>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    Disponibilidad Inmediata · 100% Remoto
+                </div>
+                
+                <h1>Alexandra<br><span>Cáceres Ayala</span></h1>
+                
+                <div class="typing-text">
+                    <span id="typed-text"></span><span class="cursor">&nbsp;</span>
+                </div>
+
+                <p>Analista de Datos con fuerte background en operaciones. Transformo información compleja en insights accionables, conectando los hallazgos técnicos directamente con la optimización de métricas y objetivos de negocio.</p>
+
+                <div class="btn-group">
+                    <a href="mailto:alexandraaca7@gmail.com" class="btn btn-glow">
+                        <i class="fa-solid fa-envelope"></i> Contactar ahora
+                    </a>
+                    <a href="https://linkedin.com/in/alexandra-caceres-ayala" target="_blank" class="btn btn-glass">
+                        <i class="fa-brands fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-image-container">
+                <div class="glow-circle"></div>
+                <img src="perfil.png" alt="Alexandra Cáceres">
+            </div>
+        </header>
+
+        <section class="tools-section">
+            <h4 class="tools-title">Stack Técnico Principal</h4>
+            <div class="tools-grid">
+                <i class="devicon-python-plain colored tool-icon" title="Python"></i>
+                <i class="devicon-mysql-original-wordmark colored tool-icon" style="font-size: 55px;" title="MySQL"></i>
+                <div class="tool-icon" title="Power BI" style="display:flex; align-items:center; cursor:pointer;">
+                    <svg class="powerbi-icon" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#F2C811" d="M896 512v1536H384V512h512z"/>
+                        <path fill="#D2A400" d="M1536 0v2048h-512V0h512z"/>
+                        <path fill="#E6B600" d="M2048 1024v1024h-512V1024h512z"/>
+                    </svg>
+                </div>
+                <i class="devicon-googlecloud-plain colored tool-icon" title="Google Cloud"></i>
+                <i class="devicon-amazonwebservices-plain-wordmark colored tool-icon" title="AWS"></i>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Análisis en Acción</h2>
             
-            <div class="tech-stack">
-                <div class="tech-pill">Power BI</div>
-                <div class="tech-pill">Python</div>
-                <div class="tech-pill">SQL / MySQL</div>
-                <div class="tech-pill">Google Cloud / AWS</div>
-            </div>
-
-            <div class="action-buttons">
-                <a href="mailto:alexandraaca7@gmail.com" class="btn btn-primary">Contactar</a>
-                <a href="https://linkedin.com/in/alexandra-caceres-ayala" target="_blank" class="btn-social"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/tu-usuario" target="_blank" class="btn-social"><i class="fa-brands fa-github"></i></a>
-            </div>
-        </div>
-
-        <div class="hero-visual fade-in delay-1">
             <div class="glass-card">
-                <div class="glass-header">
-                    <span>Performance Predicitivo</span>
-                    <i class="fa-solid fa-chart-pie"></i>
+                <div class="project-info">
+                    <span class="project-tag">Data Pipeline & Machine Learning</span>
+                    <h3 class="project-title">Proyecto Fever-Lens</h3>
+                    <p style="color: var(--text-main); font-size: 15px; line-height: 1.7;">
+                        Desarrollo de pipeline de datos y modelo predictivo enfocado en eventos masivos. Diseñado para optimizar el ROAS y predecir la ocupación con alta precisión.
+                    </p>
+                    <div class="tech-chips">
+                        <span class="chip"><i class="devicon-mysql-plain"></i> SQL</span>
+                        <span class="chip"><i class="devicon-python-plain"></i> Python</span>
+                        <span class="chip"><i class="fa-solid fa-chart-pie"></i> Power BI</span>
+                    </div>
                 </div>
                 
-                <div class="data-row">
-                    <div class="data-label"><span>Precisión del Modelo (SQL/Py)</span> <span>85%</span></div>
-                    <div class="data-bar-bg"><div class="data-bar-fill fill-1"></div></div>
-                </div>
-                
-                <div class="data-row">
-                    <div class="data-label"><span>Optimización de ROAS</span> <span>62%</span></div>
-                    <div class="data-bar-bg"><div class="data-bar-fill fill-2"></div></div>
-                </div>
-                
-                <div class="data-row">
-                    <div class="data-label"><span>Calidad de Datos (ETL)</span> <span>95%</span></div>
-                    <div class="data-bar-bg"><div class="data-bar-fill fill-3"></div></div>
+                <div class="dashboard-container">
+                    <div style="text-align: center; color: var(--primary);">
+                        <i class="fa-solid fa-chart-column" style="font-size: 40px; margin-bottom: 15px;"></i>
+                        <p style="font-family: 'Space Grotesk'; font-size: 14px;">ESPACIO PARA DASHBOARD</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </section>
+    </div>
 
-    <section class="fade-in delay-2" style="margin-top: 50px;">
-        <h2 class="section-title">Proyecto Destacado</h2>
-        <div class="project-card">
-            <div class="project-info">
-                <h3 style="color: var(--primary);">Proyecto Fever-Lens</h3>
-                <p>Desarrollo de un pipeline de datos y modelo predictivo conectado a un dashboard interactivo, enfocado en el análisis masivo de eventos.</p>
-                <p><strong>Impacto de Negocio:</strong> Diseñado para optimizar el ROAS (Retorno de Inversión Publicitaria) y predecir la ocupación de eventos masivos con alta precisión.</p>
-                <div class="tech-stack" style="margin-top: 20px;">
-                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">SQL</div>
-                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">Python</div>
-                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">Power BI</div>
-                </div>
-            </div>
-            <div class="dashboard-placeholder">
-                <i class="fa-solid fa-chart-line"></i>
-            </div>
-        </div>
-    </section>
-</div>
+    <script>
+        const textArray = ["Storytelling de Datos.", "Limpieza y Modelado.", "Optimización de KPIs."];
+        let textIndex = 0; let charIndex = 0;
+        const typedTextElement = document.getElementById("typed-text");
 
+        function type() {
+            if (charIndex < textArray[textIndex].length) {
+                typedTextElement.textContent += textArray[textIndex].charAt(charIndex);
+                charIndex++; setTimeout(type, 80);
+            } else { setTimeout(erase, 2000); }
+        }
+        function erase() {
+            if (charIndex > 0) {
+                typedTextElement.textContent = textArray[textIndex].substring(0, charIndex - 1);
+                charIndex--; setTimeout(erase, 40);
+            } else {
+                textIndex++; if (textIndex >= textArray.length) textIndex = 0;
+                setTimeout(type, 500);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() { setTimeout(type, 1000); });
+    </script>
 </body>
 </html>
