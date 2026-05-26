@@ -49,14 +49,14 @@
         .hero {
             min-height: 100vh;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.2fr 0.8fr;
             align-items: center;
             gap: 40px;
             padding-top: 60px;
         }
         .hero-content { z-index: 2; }
 
-        /* SOLUCIÓN AL BRAZO: MARCO CIRCULAR ELEGANTE */
+        /* CORRECCIÓN DE LA FOTOGRAFÍA: ENCUADRE PERFECTO DEL ROSTRO */
         .hero-image-container {
             display: flex; justify-content: center; align-items: center; z-index: 1;
             animation: levitate 6s ease-in-out infinite;
@@ -71,14 +71,20 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: flex-end; /* Alinea la foto abajo para ocultar cortes */
+            align-items: center; /* Cambiado a centrado vertical */
             position: relative;
         }
         .profile-frame img {
-            width: 95%; /* Escala la foto dentro del círculo */
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            transform: translateY(10px); /* Ajuste fino hacia abajo */
+            object-position: center 15%;
             filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.6));
+            /* --- CÓDIGO NUEVO PARA NITIDEZ --- */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: high-quality;
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
         @keyframes levitate { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
 
@@ -93,7 +99,7 @@
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
         .hero h1 {
-            font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 6vw, 75px);
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5.5vw, 70px);
             color: var(--text-light); line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px;
         }
         .hero h1 span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -104,28 +110,24 @@
 
         .hero p { font-size: 17px; line-height: 1.8; margin-bottom: 35px; font-weight: 300; }
 
-        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        /* GRUPO DE BOTONES ACTUALIZADO (TODOS ARRIBA) */
+        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn {
-            padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
-            text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;
         }
         .btn-glow { background: linear-gradient(90deg, var(--primary), #e56b82); color: #fff; border: none; box-shadow: 0 0 20px rgba(255, 143, 163, 0.4); }
         .btn-glow:hover { box-shadow: 0 0 30px rgba(255, 143, 163, 0.6); transform: translateY(-3px); }
         .btn-glass { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-light); backdrop-filter: blur(10px); }
-        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); color: var(--primary); border-color: var(--primary); }
 
-        /* SECCIÓN HERRAMIENTAS / LOGOS AMPLIADA */
+        /* SECCIÓN HERRAMIENTAS / LOGOS */
         .tools-section { text-align: center; margin: 60px 0 100px 0; }
         .tools-title { font-size: 16px; color: var(--text-main); margin-bottom: 30px; letter-spacing: 2px; text-transform: uppercase; }
         .tools-grid { display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; align-items: center; max-width: 900px; margin: 0 auto;}
         
-        .tool-icon {
-            font-size: 45px; transition: transform 0.3s ease, filter 0.3s ease;
-            filter: grayscale(30%) opacity(0.8); cursor: default;
-        }
+        .tool-icon { font-size: 45px; transition: transform 0.3s ease, filter 0.3s ease; filter: grayscale(30%) opacity(0.8); cursor: default; }
         .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
-        
-        /* Iconos SVG Customizados para los que no están en Devicon */
         .custom-svg { width: 45px; height: 45px; transition: all 0.3s ease; filter: grayscale(30%) opacity(0.8); }
         .tool-icon:hover .custom-svg { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
 
@@ -187,6 +189,12 @@
                     <a href="https://linkedin.com/in/alexandra-caceres-ayala" target="_blank" class="btn btn-glass">
                         <i class="fa-brands fa-linkedin"></i> LinkedIn
                     </a>
+                    <a href="https://github.com/alexandra-caceres-ayala/alexandra-caceres-portfolio" target="_blank" class="btn btn-glass">
+                        <i class="fa-brands fa-github"></i> GitHub
+                    </a>
+                    <a href="https://notion.so" target="_blank" class="btn btn-glass">
+                        <i class="devicon-notion-plain"></i> Notion
+                    </a>
                 </div>
             </div>
 
@@ -201,36 +209,27 @@
             <h4 class="tools-title">Stack Técnico & Herramientas</h4>
             <div class="tools-grid">
                 <i class="devicon-python-plain colored tool-icon" title="Python"></i>
-                
                 <i class="devicon-mysql-original colored tool-icon" title="MySQL"></i>
-                
                 <div class="tool-icon" title="Power BI">
                     <svg class="custom-svg" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg">
                         <path fill="#F2C811" d="M896 512v1536H384V512h512z"/><path fill="#D2A400" d="M1536 0v2048h-512V0h512z"/><path fill="#E6B600" d="M2048 1024v1024h-512V1024h512z"/>
                     </svg>
                 </div>
-
                 <i class="devicon-googlecloud-plain colored tool-icon" title="Google Cloud"></i>
-                
                 <i class="devicon-amazonwebservices-plain-wordmark colored tool-icon" style="font-size: 50px;" title="AWS"></i>
-
                 <div class="tool-icon" title="Google Sheets">
                     <svg class="custom-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" fill="#0F9D58"/>
-                        <path d="M14 2V8H20" fill="#00E676" opacity="0.3"/>
-                        <path d="M8 12H16V14H8V12ZM8 16H16V18H8V16Z" fill="white"/>
+                        <path d="M14 2V8H20" fill="#00E676" opacity="0.3"/><path d="M8 12H16V14H8V12ZM8 16H16V18H8V16Z" fill="white"/>
                     </svg>
                 </div>
-
                 <i class="devicon-github-original tool-icon" style="color: #ffffff;" title="GitHub"></i>
-
                 <i class="devicon-notion-plain tool-icon" style="color: #ffffff;" title="Notion"></i>
             </div>
         </section>
 
         <section>
             <h2 class="section-title">Análisis en Acción</h2>
-            
             <div class="glass-card">
                 <div class="project-info">
                     <span class="project-tag">Data Pipeline & Machine Learning</span>
@@ -244,7 +243,6 @@
                         <span class="chip"><i class="fa-solid fa-chart-pie"></i> Power BI</span>
                     </div>
                 </div>
-                
                 <div class="dashboard-container">
                     <div style="text-align: center; color: var(--primary);">
                         <i class="fa-solid fa-chart-column" style="font-size: 40px; margin-bottom: 15px;"></i>
