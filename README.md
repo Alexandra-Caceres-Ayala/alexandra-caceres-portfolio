@@ -1,3 +1,3 @@
 # Portfolio
 Portafolio de Análisis de Datos.
-<img src="./perfil.png" width="50%" />
+<img src="./landing.png" width="50%" />
