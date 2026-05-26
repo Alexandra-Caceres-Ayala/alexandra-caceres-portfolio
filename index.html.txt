@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandra Cáceres | Data Analyst</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a192f;
+            --bg-card: #112240;
+            --primary: #64ffda; /* Teal neón */
+            --text-main: #8892b0;
+            --text-light: #ccd6f6;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 0;
+        }
+
+        h1, h2, h3 { font-family: 'Outfit', sans-serif; color: var(--text-light); }
+
+        /* ANIMACIÓN DE ENTRADA */
+        .fade-in {
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Retrasos para que aparezcan en cascada */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .hero .greeting { color: var(--primary); font-family: 'Inter', monospace; margin-bottom: 20px; font-size: 16px;}
+        .hero h1 { font-size: clamp(40px, 8vw, 70px); margin-bottom: 10px; letter-spacing: -2px; line-height: 1.1; }
+        .hero h2 { font-size: clamp(30px, 6vw, 50px); color: var(--text-main); margin-bottom: 30px; }
+        .hero p { max-width: 600px; font-size: 18px; margin-bottom: 40px; }
+
+        /* TECH STACK PILLS CON HOVER */
+        .tech-stack {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .tech-pill {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-family: monospace;
+            background: rgba(100, 255, 218, 0.05);
+            transition: var(--transition);
+            cursor: default;
+        }
+        .tech-pill:hover {
+            background: rgba(100, 255, 218, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        /* BOTONES DE CONTACTO */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 14px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-primary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        .btn-primary:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
+        }
+        .btn-social {
+            color: var(--text-light);
+            font-size: 24px;
+            transition: var(--transition);
+        }
+        .btn-social:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* PROJECT SECTION */
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            white-space: nowrap;
+        }
+        .section-title::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 100%;
+            background: #233554;
+            margin-left: 20px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+            border: 1px solid #233554;
+            transition: var(--transition);
+        }
+        .project-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -15px rgba(100,255,218,0.2);
+        }
+
+        .project-info h3 { font-size: 22px; margin-bottom: 20px; color: var(--text-light); }
+        .project-info p { margin-bottom: 20px; font-size: 15px;}
+        
+        .dashboard-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #020c1b;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #233554;
+            position: relative;
+        }
+        .dashboard-placeholder i { font-size: 40px; color: var(--primary); opacity: 0.5; }
+
+        /* RESPONSIVE DESIGN (MÓVILES) */
+        @media (max-width: 768px) {
+            .project-card {
+                grid-template-columns: 1fr; /* Apila el texto arriba del dashboard en móviles */
+                padding: 25px;
+            }
+            .dashboard-placeholder { height: 300px; }
+            .action-buttons { flex-direction: column; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="hero fade-in">
+        <p class="greeting">Hola, mi nombre es</p>
+        <h1>Alexandra Cáceres.</h1>
+        <h2>Transformo datos en decisiones.</h2>
+        <p>Soy Analista de Datos especializada en extraer insights accionables a través de <strong>SQL, Python y Power BI</strong>. Destaco en el storytelling de datos, conectando los hallazgos técnicos directamente con los objetivos de negocio y la optimización de métricas operativas.</p>
+        
+        <div class="tech-stack">
+            <div class="tech-pill">Power BI</div>
+            <div class="tech-pill">Python</div>
+            <div class="tech-pill">SQL / MySQL</div>
+            <div class="tech-pill">Google Cloud & AWS</div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="mailto:alexandraaca7@gmail.com" class="btn btn-primary"><i class="fa-regular fa-envelope"></i> Contactar</a>
+            <a href="https://linkedin.com/in/alexandra-caceres-ayala" target="_blank" class="btn btn-social"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/tu-usuario" target="_blank" class="btn btn-social"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </header>
+
+    <section class="fade-in delay-1" style="margin-top: 50px;">
+        <h2 class="section-title">Proyecto Destacado</h2>
+        <div class="project-card">
+            <div class="project-info">
+                <h3 style="color: var(--primary);">Proyecto Fever-Lens</h3>
+                <p>Desarrollo de un pipeline de datos y modelo predictivo conectado a un dashboard interactivo, enfocado en el análisis masivo de eventos.</p>
+                <p><strong>Impacto de Negocio:</strong> Diseñado para optimizar el ROAS (Retorno de Inversión Publicitaria) y predecir la ocupación de eventos masivos con alta precisión.</p>
+                <div class="tech-stack" style="margin-top: 20px;">
+                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">SQL</div>
+                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">Python</div>
+                    <div class="tech-pill" style="font-size: 11px; padding: 4px 10px;">Power BI</div>
+                </div>
+            </div>
+            <div class="dashboard-placeholder">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
