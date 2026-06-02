@@ -6,7 +6,7 @@
     <meta name="description" content="Portafolio de Alexandra Cáceres, Data Analyst especializada en transformar información compleja en insights accionables.">
     <title>Alexandra Cáceres | Data Analyst</title>
 
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,13 +14,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
-    <!-- Librerías Externas -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
 
     <style>
         :root {
-            /* Paleta Tech Elegante & Femenina */
+            /* Paleta Tech Elegante & Femenina (Modo Oscuro por defecto) */
             --bg-color: #171020; 
             --primary: #ff8fa3; 
             --secondary: #c9a0dc; 
@@ -31,6 +30,22 @@
             --terminal-bg: #0d0914;
         }
 
+        /* --- MODO CLARO (Sobreescritura de variables) --- */
+        [data-theme="light"] {
+            --bg-color: #f6f3fa; 
+            --primary: #e85d7b; 
+            --secondary: #9a6bb3; 
+            --text-main: #4a4052; 
+            --text-light: #171020;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --terminal-bg: #e2daeb;
+        }
+
+        [data-theme="light"] .blob {
+            opacity: 0.8; 
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -38,6 +53,7 @@
             color: var(--text-main);
             font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         /* Preferencia de Movimiento Reducido (Accesibilidad) */
@@ -50,14 +66,43 @@
             }
         }
 
+        /* BOTÓN TOGGLE TEMA */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
         /* FONDO ANIMADO */
         .background-blobs {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; overflow: hidden; background: var(--bg-color);
+            transition: background-color 0.4s ease;
         }
         .blob {
             position: absolute; filter: blur(90px); opacity: 0.5;
             animation: float 20s infinite alternate;
+            transition: opacity 0.4s ease;
         }
         .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(255,143,163,0.3) 0%, rgba(0,0,0,0) 70%); }
         .blob-2 { bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(201,160,220,0.2) 0%, rgba(0,0,0,0) 70%); animation-delay: -5s; }
@@ -97,6 +142,7 @@
             padding: 8px 18px; border-radius: 30px; font-size: 13px;
             backdrop-filter: blur(10px); margin-bottom: 25px;
             color: var(--primary); letter-spacing: 1px;
+            transition: all 0.4s ease;
         }
         .status-dot { width: 8px; height: 8px; background-color: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
@@ -104,10 +150,11 @@
         .hero h1 {
             font-family: 'Space Grotesk', sans-serif; font-size: clamp(40px, 5.5vw, 70px);
             color: var(--text-light); line-height: 1.1; margin-bottom: 15px; letter-spacing: -1px;
+            transition: color 0.4s ease;
         }
         .hero h1 span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        .typing-text { font-size: clamp(20px, 3vw, 32px); color: var(--text-light); margin-bottom: 25px; min-height: 40px; font-weight: 300; }
+        .typing-text { font-size: clamp(20px, 3vw, 32px); color: var(--text-light); margin-bottom: 25px; min-height: 40px; font-weight: 300; transition: color 0.4s ease; }
         .typing-text .cursor { display: inline-block; width: 3px; background-color: var(--primary); animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
@@ -132,18 +179,18 @@
         .kpi-card {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
             border-radius: 16px; padding: 25px; text-align: center; backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
         }
         .kpi-card:hover { transform: translateY(-5px); border-color: var(--primary); }
         .kpi-number {
             font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700;
             color: var(--primary); margin-bottom: 5px; display: flex; justify-content: center; align-items: baseline;
         }
-        .kpi-label { font-size: 14px; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; }
+        .kpi-label { font-size: 14px; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; }
 
         /* SECCIÓN STACK */
         .tools-section { margin: 60px 0 100px 0; }
-        .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 36px; color: var(--text-light); margin-bottom: 40px; text-align: center; }
+        .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 36px; color: var(--text-light); margin-bottom: 40px; text-align: center; transition: color 0.4s ease; }
         
         .stack-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px;
@@ -151,19 +198,21 @@
 
         /* RADAR CHART */
         .chart-container {
-            background: rgba(25, 15, 30, 0.6); border: 1px solid var(--glass-border);
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
             border-radius: 24px; padding: 30px; backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
         }
 
         /* TERMINAL SQL */
         .sql-terminal {
-            background: var(--terminal-bg); border: 1px solid #333; border-radius: 12px;
+            background: var(--terminal-bg); border: 1px solid var(--glass-border); border-radius: 12px;
             overflow: hidden; font-family: 'Fira Code', monospace; font-size: 14px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: background-color 0.4s ease;
         }
         .terminal-header {
-            background: #221c2b; padding: 10px 15px; display: flex; align-items: center; gap: 8px;
-            color: #888; font-size: 12px; border-bottom: 1px solid #333;
+            background: rgba(0,0,0,0.2); padding: 10px 15px; display: flex; align-items: center; gap: 8px;
+            color: #888; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .terminal-header .dot { width: 12px; height: 12px; border-radius: 50%; }
         .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
@@ -181,7 +230,7 @@
         .terminal-result { margin-top: 20px; display: none; opacity: 0; transition: opacity 0.5s ease; }
         .terminal-result.show { display: block; opacity: 1; }
         .sql-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-        .sql-table th, .sql-table td { border: 1px solid #444; padding: 8px; text-align: left; }
+        .sql-table th, .sql-table td { border: 1px solid rgba(128,128,128,0.3); padding: 8px; text-align: left; }
         .sql-table th { background: rgba(255, 255, 255, 0.05); color: var(--secondary); }
 
         /* LOGOS */
@@ -193,12 +242,12 @@
 
         /* SECCIÓN PROYECTO */
         .glass-card {
-            background: rgba(25, 15, 30, 0.6); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); border-radius: 24px; padding: 50px;
+            background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); border-radius: 24px; padding: 50px;
             display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); margin-bottom: 80px; transition: all 0.3s ease;
         }
         .glass-card:hover { border-color: rgba(255, 143, 163, 0.3); transform: translateY(-5px); }
         .project-tag { color: var(--primary); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .project-title { font-size: 28px; color: white; margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif;}
+        .project-title { font-size: 28px; color: var(--text-light); margin-bottom: 20px; font-family: 'Space Grotesk', sans-serif; transition: color 0.4s ease;}
         .tech-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
         .chip { color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 13px; border: 1px solid rgba(255, 143, 163, 0.2); }
         
@@ -222,13 +271,15 @@
 </head>
 <body>
 
-    <!-- FONDO BLOBS -->
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambiar tema">
+        <i class="fa-solid fa-sun" id="theme-icon"></i>
+    </button>
+
     <div class="background-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
     
-    <!-- CONTENEDOR RED DE DATOS TSPARTICLES -->
     <div id="tsparticles"></div>
 
     <div class="container">
@@ -469,8 +520,8 @@
                 options: {
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            angleLines: { color: 'rgba(128, 128, 128, 0.2)' },
+                            grid: { color: 'rgba(128, 128, 128, 0.2)' },
                             pointLabels: { font: { size: 12 } },
                             ticks: { display: false, min: 0, max: 100 }
                         }
@@ -550,6 +601,48 @@
                 }
             },
             detectRetina: true
+        });
+
+        // 5. Lógica para el Modo Oscuro / Claro
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+
+        // Función para actualizar los colores de Chart.js dinámicamente
+        function updateChartColors(isLight) {
+            const chartInstance = Chart.getChart("skillsChart");
+            if (chartInstance) {
+                const textColor = isLight ? '#4a4052' : '#d8c3d6';
+                Chart.defaults.color = textColor;
+                chartInstance.update();
+            }
+        }
+
+        // 1. Comprobar si hay una preferencia guardada en localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            htmlElement.setAttribute('data-theme', 'light');
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+            setTimeout(() => updateChartColors(true), 150); // Delay para asegurar que Chart.js ya cargó
+        }
+
+        // 2. Escuchar el click en el botón
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                // Cambiar a Oscuro
+                htmlElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                updateChartColors(false);
+            } else {
+                // Cambiar a Claro
+                htmlElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                updateChartColors(true);
+            }
         });
     </script>
 </body>
