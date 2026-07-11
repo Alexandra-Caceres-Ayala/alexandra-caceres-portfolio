@@ -257,6 +257,20 @@
         /* Dashboard iframe styling */
         .dashboard-iframe { width: 100%; height: 100%; border: none; }
 
+        /* Variante para contenedores de imágenes en proyectos */
+        .dashboard-container.image-mode {
+            height: auto;
+            display: flex;
+            padding: 0;
+        }
+
+        .project-preview-img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
         @media (max-width: 960px) {
             .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
             .hero-content { order: 2; }
@@ -400,7 +414,7 @@
                 </div>
             </section>
 
-<section>
+            <section>
                 <h2 class="section-title">Análisis en Acción</h2>
                 
                 <div class="glass-card">
@@ -418,7 +432,7 @@
                     </div>
                     
                     <div class="dashboard-container">
-                        < 
+                        <iframe 
                             class="dashboard-iframe"
                             title="Fever-Lens Dashboard" 
                             src="https://app.powerbi.com/view?r=eyJrIjoiX_PON_TU_LINK_AQUI_X_IiwidCI6IjkzYz... " 
@@ -450,8 +464,8 @@
                         </div>
                     </div>
                     
-                    <div class="dashboard-container">
-                       <img src="Bienestar_Vascular_Pausas_Activas.jpeg" />
+                    <div class="dashboard-container image-mode">
+                       <img src="Bienestar_Vascular_Pausas_Activas.jpeg" alt="Bienestar Vascular - Pantallazo del proyecto" class="project-preview-img" />
                     </div>
                 </div>
             </section>
