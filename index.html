@@ -19,7 +19,6 @@
 
     <style>
         :root {
-            /* Paleta Tech Elegante & Femenina (Modo Oscuro por defecto) */
             --bg-color: #171020; 
             --primary: #ff8fa3; 
             --secondary: #c9a0dc; 
@@ -30,7 +29,6 @@
             --terminal-bg: #0d0914;
         }
 
-        /* --- MODO CLARO (Sobreescritura de variables) --- */
         [data-theme="light"] {
             --bg-color: #f6f3fa; 
             --primary: #e85d7b; 
@@ -56,7 +54,6 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Preferencia de Movimiento Reducido (Accesibilidad) */
         @media (prefers-reduced-motion: reduce) {
             *, ::before, ::after {
                 animation-duration: 0.01ms !important;
@@ -66,7 +63,6 @@
             }
         }
 
-        /* BOTÓN TOGGLE TEMA */
         .theme-toggle-btn {
             position: fixed;
             top: 20px;
@@ -93,7 +89,6 @@
             border-color: var(--primary);
         }
 
-        /* FONDO ANIMADO */
         .background-blobs {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: -2; overflow: hidden; background: var(--bg-color);
@@ -110,7 +105,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 10; }
 
-        /* HERO SECTION */
         .hero {
             min-height: 100vh; display: grid; grid-template-columns: 1.2fr 0.8fr;
             align-items: center; gap: 40px; padding-top: 60px;
@@ -160,7 +154,6 @@
 
         .hero p { font-size: 17px; line-height: 1.8; margin-bottom: 35px; font-weight: 300; }
 
-        /* BOTONES */
         .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn {
             padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600;
@@ -171,7 +164,6 @@
         .btn-glass { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-light); backdrop-filter: blur(10px); }
         .btn-glass:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); color: var(--primary); border-color: var(--primary); }
 
-        /* SECCIÓN KPIs */
         .kpi-section {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px; margin: 40px 0 80px 0;
@@ -188,7 +180,6 @@
         }
         .kpi-label { font-size: 14px; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; transition: color 0.4s ease; }
 
-        /* SECCIÓN STACK */
         .tools-section { margin: 60px 0 100px 0; }
         .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 36px; color: var(--text-light); margin-bottom: 40px; text-align: center; transition: color 0.4s ease; }
         
@@ -196,14 +187,12 @@
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px;
         }
 
-        /* RADAR CHART */
         .chart-container {
             background: var(--glass-bg); border: 1px solid var(--glass-border);
             border-radius: 24px; padding: 30px; backdrop-filter: blur(20px);
             transition: all 0.4s ease;
         }
 
-        /* TERMINAL SQL */
         .sql-terminal {
             background: var(--terminal-bg); border: 1px solid var(--glass-border); border-radius: 12px;
             overflow: hidden; font-family: 'Fira Code', monospace; font-size: 14px;
@@ -233,14 +222,12 @@
         .sql-table th, .sql-table td { border: 1px solid rgba(128,128,128,0.3); padding: 8px; text-align: left; }
         .sql-table th { background: rgba(255, 255, 255, 0.05); color: var(--secondary); }
 
-        /* LOGOS */
         .tools-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 30px; }
-        .tool-icon { font-size: 35px; transition: transform 0.3s ease, filter 0.3s ease; filter: grayscale(30%) opacity(0.8); cursor: default; }
-        .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
-        .custom-svg { width: 35px; height: 35px; transition: all 0.3s ease; filter: grayscale(30%) opacity(0.8); }
-        .tool-icon:hover .custom-svg { transform: scale(1.15) translateY(-5px); filter: grayscale(0%) opacity(1); }
+        .tool-icon { font-size: 35px; transition: transform 0.3s ease, filter 0.3s ease; filter: opacity(0.85); cursor: default; }
+        .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
+        .custom-svg { width: 35px; height: 35px; transition: all 0.3s ease; filter: opacity(0.85); }
+        .tool-icon:hover .custom-svg { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
 
-        /* SECCIÓN PROYECTO */
         .glass-card {
             background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); border-radius: 24px; padding: 50px;
             display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); margin-bottom: 80px; transition: all 0.3s ease;
@@ -254,10 +241,8 @@
         .dashboard-container {
             width: 100%; height: 450px; background: #0b0710; border-radius: 16px; border: 1px solid var(--glass-border); overflow: hidden; position: relative;
         }
-        /* Dashboard iframe styling */
         .dashboard-iframe { width: 100%; height: 100%; border: none; }
 
-        /* Variante para contenedores de imágenes en proyectos */
         .dashboard-container.image-mode {
             height: fit-content;
             display: flex;
@@ -271,7 +256,6 @@
             object-fit: contain;
         }
 
-        /* SECCIÓN EXPERIENCIA */
         .experience-section { margin: 60px 0 100px 0; }
         .experience-timeline { display: flex; flex-direction: column; gap: 20px; margin-top: 40px; }
         .experience-item {
@@ -291,7 +275,6 @@
         .experience-date { color: var(--text-main); font-size: 13px; margin-left: auto; opacity: 0.8; }
         .experience-item p { font-size: 14px; line-height: 1.7; color: var(--text-main); }
 
-        /* BOTÓN DESHABILITADO (pendiente de dato) */
         .btn-disabled {
             background: var(--glass-bg); border: 1px dashed var(--glass-border); color: var(--text-main);
             opacity: 0.6; cursor: not-allowed; pointer-events: none;
@@ -398,13 +381,13 @@
                         
                         <div class="tools-grid">
                             <i class="devicon-python-plain colored tool-icon" title="Python" aria-hidden="true"></i>
-                            <i class="fa-solid fa-database tool-icon" title="SQL" aria-hidden="true"></i>
+                            <i class="fa-solid fa-database tool-icon" title="SQL" aria-hidden="true" style="color:#8a847b;"></i>
                             <div class="tool-icon" title="Power BI">
                                 <svg class="custom-svg" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path fill="#F2C811" d="M896 512v1536H384V512h512z"/><path fill="#D2A400" d="M1536 0v2048h-512V0h512z"/><path fill="#E6B600" d="M2048 1024v1024h-512V1024h512z"/>
                                 </svg>
                             </div>
-                            <i class="devicon-amazonwebservices-original colored tool-icon" title="AWS Cloud" aria-hidden="true"></i>
+                            <i class="fa-brands fa-aws tool-icon" title="AWS Cloud" aria-hidden="true" style="color:#FF9900;"></i>
                         </div>
                     </div>
 
@@ -555,7 +538,6 @@
     </div>
 
     <script>
-        // 1. Efecto de Escritura (Typing Effect)
         const textArray = ["Storytelling de Datos.", "Limpieza y Modelado.", "Optimización de KPIs."];
         let textIndex = 0; let charIndex = 0;
         const typedTextElement = document.getElementById("typed-text");
@@ -576,7 +558,6 @@
             }
         }
         
-        // 2. Ejecución Terminal SQL
         function runSQL() {
             const btn = document.querySelector('.run-btn');
             const result = document.getElementById('sql-result');
@@ -588,22 +569,35 @@
             }, 800);
         }
 
-        // 3. Inicializar Animaciones y Gráficos cuando carga la página
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.documentElement;
+        let skillsChartInstance = null;
+
+        function applyChartTheme(isLight) {
+            if (!skillsChartInstance) return;
+            const textColor = isLight ? '#4a4052' : '#d8c3d6';
+            const gridColor = isLight ? 'rgba(74, 64, 82, 0.2)' : 'rgba(128, 128, 128, 0.2)';
+            Chart.defaults.color = textColor;
+            skillsChartInstance.options.scales.r.pointLabels.color = textColor;
+            skillsChartInstance.options.scales.r.angleLines.color = gridColor;
+            skillsChartInstance.options.scales.r.grid.color = gridColor;
+            skillsChartInstance.update();
+        }
+
         document.addEventListener("DOMContentLoaded", function() { 
             setTimeout(type, 1000); 
 
-            // Animación de contadores (KPIs)
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
-                const duration = 2000; // 2 segundos
-                const increment = target / (duration / 16); // 60fps
+                const duration = 2000;
+                const increment = target / (duration / 16);
                 
                 let current = 0;
                 const updateCounter = () => {
                     current += increment;
                     if (current < target) {
-                        // Comprobar si es decimal (para el 1.5M)
                         counter.innerText = target % 1 !== 0 ? current.toFixed(1) : Math.ceil(current);
                         requestAnimationFrame(updateCounter);
                     } else {
@@ -611,7 +605,6 @@
                     }
                 };
                 
-                // Opción Pro: Usar IntersectionObserver para que cuente cuando se vea en pantalla
                 const observer = new IntersectionObserver(entries => {
                     if(entries[0].isIntersecting) {
                         updateCounter();
@@ -621,12 +614,12 @@
                 observer.observe(counter);
             });
 
-            // Configuración Chart.js (Gráfico de Radar)
             const ctx = document.getElementById('skillsChart').getContext('2d');
-            Chart.defaults.color = '#d8c3d6';
+            const startsLight = htmlElement.getAttribute('data-theme') === 'light';
+            Chart.defaults.color = startsLight ? '#4a4052' : '#d8c3d6';
             Chart.defaults.font.family = "'Outfit', sans-serif";
             
-            new Chart(ctx, {
+            skillsChartInstance = new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: ['Data Cleaning', 'Data Viz', 'Machine Learning', 'SQL / Bases de Datos', 'Cloud Computing'],
@@ -645,9 +638,9 @@
                 options: {
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(128, 128, 128, 0.2)' },
-                            grid: { color: 'rgba(128, 128, 128, 0.2)' },
-                            pointLabels: { font: { size: 12 } },
+                            angleLines: { color: startsLight ? 'rgba(74, 64, 82, 0.2)' : 'rgba(128, 128, 128, 0.2)' },
+                            grid: { color: startsLight ? 'rgba(74, 64, 82, 0.2)' : 'rgba(128, 128, 128, 0.2)' },
+                            pointLabels: { color: startsLight ? '#4a4052' : '#d8c3d6', font: { size: 12 } },
                             ticks: { display: false, min: 0, max: 100 }
                         }
                     },
@@ -658,7 +651,6 @@
             });
         });
 
-        // 4. Configuración del efecto de red de datos (tsParticles)
         tsParticles.load("tsparticles", {
             fullScreen: { 
                 enable: true, 
@@ -728,45 +720,25 @@
             detectRetina: true
         });
 
-        // 5. Lógica para el Modo Oscuro / Claro
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const htmlElement = document.documentElement;
-
-        // Función para actualizar los colores de Chart.js dinámicamente
-        function updateChartColors(isLight) {
-            const chartInstance = Chart.getChart("skillsChart");
-            if (chartInstance) {
-                const textColor = isLight ? '#4a4052' : '#d8c3d6';
-                Chart.defaults.color = textColor;
-                chartInstance.update();
-            }
-        }
-
-        // 1. Comprobar si hay una preferencia guardada en localStorage
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
             htmlElement.setAttribute('data-theme', 'light');
             themeIcon.classList.replace('fa-sun', 'fa-moon');
-            setTimeout(() => updateChartColors(true), 150); // Delay para asegurar que Chart.js ya cargó
         }
 
-        // 2. Escuchar el click en el botón
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             
             if (currentTheme === 'light') {
-                // Cambiar a Oscuro
                 htmlElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
                 themeIcon.classList.replace('fa-moon', 'fa-sun');
-                updateChartColors(false);
+                applyChartTheme(false);
             } else {
-                // Cambiar a Claro
                 htmlElement.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
-                updateChartColors(true);
+                applyChartTheme(true);
             }
         });
     </script>
