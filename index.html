@@ -6,7 +6,6 @@
     <meta name="description" content="Portafolio de Alexandra Cáceres, Data Analyst especializada en transformar información compleja en insights accionables.">
     <title>Alexandra Cáceres | Data Analyst</title>
 
-    <!-- Aplica el tema ANTES de pintar, para evitar el parpadeo oscuro -->
     <script>
       try {
         if (localStorage.getItem('theme') === 'light') {
@@ -189,6 +188,33 @@
             border-radius: 24px; padding: 30px; backdrop-filter: blur(20px); transition: all 0.4s ease;
         }
 
+        /* FILTRO estilo dashboard */
+        .filter-bar { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+        .filter-btn {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-main); padding: 7px 14px; border-radius: 20px;
+            font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.25s ease;
+            display: inline-flex; align-items: center; gap: 7px;
+        }
+        .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .dot-legend { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+        .filter-btn.active .dot-legend { box-shadow: 0 0 0 2px rgba(255,255,255,0.7); }
+
+        .stack-label {
+            text-align: center; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-main); opacity: 0.65; margin-top: 30px; transition: color 0.4s ease;
+        }
+        .tools-grid { display: flex; justify-content: center; gap: 34px; flex-wrap: wrap; margin-top: 14px; }
+        .stack-group { text-align: center; }
+        .stack-group-title { display: block; font-size: 12px; color: var(--primary); font-weight: 600; margin-bottom: 12px; transition: color 0.4s ease; }
+        .stack-icons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .tool-icon { font-size: 30px; transition: transform 0.3s ease, filter 0.3s ease; filter: opacity(0.85); cursor: default; }
+        .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
+        .custom-svg { width: 30px; height: 30px; transition: all 0.3s ease; filter: opacity(0.85); }
+        .tool-icon:hover .custom-svg { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
+
         .sql-terminal {
             background: var(--terminal-bg); border: 1px solid var(--glass-border); border-radius: 12px;
             overflow: hidden; font-family: 'Fira Code', monospace; font-size: 14px;
@@ -222,12 +248,6 @@
         .sql-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
         .sql-table th, .sql-table td { border: 1px solid rgba(128,128,128,0.3); padding: 7px 8px; text-align: left; white-space: nowrap; }
         .sql-table th { background: var(--th-bg); color: var(--secondary); transition: background-color 0.4s ease, color 0.4s ease; }
-
-        .tools-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 30px; }
-        .tool-icon { font-size: 32px; transition: transform 0.3s ease, filter 0.3s ease; filter: opacity(0.85); cursor: default; }
-        .tool-icon:hover { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
-        .custom-svg { width: 32px; height: 32px; transition: all 0.3s ease; filter: opacity(0.85); }
-        .tool-icon:hover .custom-svg { transform: scale(1.15) translateY(-5px); filter: opacity(1); }
 
         .glass-card {
             background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(20px); border-radius: 24px; padding: 50px;
@@ -357,23 +377,17 @@
 
             <section class="tools-section">
                 <h2 class="section-title with-sub">Mi Ecosistema de Datos</h2>
-                <p class="section-sub">Cobertura real del pipeline en mis dos proyectos: uno profundiza en el análisis, el otro llega a producción.</p>
+                <p class="section-sub">Cobertura real del pipeline en mis dos proyectos: uno profundiza en el análisis, el otro llega a producción. Filtra para ver cada uno por separado.</p>
                 
                 <div class="stack-grid">
                     <div class="chart-container">
+                        <!-- FILTRO: se genera desde la lista PROYECTOS -->
+                        <div class="filter-bar" id="filter-bar" role="group" aria-label="Filtrar por proyecto"></div>
+
                         <canvas id="skillsChart"></canvas>
                         
-                        <div class="tools-grid">
-                            <i class="fa-solid fa-table-cells tool-icon" title="Google Sheets" role="img" aria-label="Google Sheets" style="color:#34A853;"></i>
-                            <i class="fa-solid fa-database tool-icon" title="SQL" role="img" aria-label="SQL" style="color:#8a9bb5;"></i>
-                            <i class="devicon-python-plain colored tool-icon" title="Python" role="img" aria-label="Python"></i>
-                            <div class="tool-icon" title="Power BI" role="img" aria-label="Power BI">
-                                <svg class="custom-svg" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                    <path fill="#F2C811" d="M896 512v1536H384V512h512z"/><path fill="#D2A400" d="M1536 0v2048h-512V0h512z"/><path fill="#E6B600" d="M2048 1024v1024h-512V1024h512z"/>
-                                </svg>
-                            </div>
-                            <i class="fa-brands fa-aws tool-icon" title="AWS Cloud" role="img" aria-label="AWS Cloud" style="color:#FF9900;"></i>
-                        </div>
+                        <p class="stack-label">Stack del proyecto</p>
+                        <div class="tools-grid" id="tools-grid"></div>
                     </div>
 
                     <div class="sql-terminal">
@@ -453,7 +467,7 @@
                         </p>
                         <div class="tech-chips">
                             <span class="chip"><i class="fa-solid fa-robot" aria-hidden="true"></i> IA Generativa</span>
-                            <span class="chip"><i class="fa-solid fa-database" aria-hidden="true"></i> Local Storage API</span>
+                            <span class="chip"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Local Storage API</span>
                             <span class="chip"><i class="fa-solid fa-file-csv" aria-hidden="true"></i> Data Export</span>
                         </div>
                         
@@ -526,6 +540,94 @@
     </div>
 
     <script>
+        /* =========================================================================
+           LISTA DE PROYECTOS — la única zona que tienes que tocar para añadir uno.
+           Copia un bloque entero, cambia los datos, y el filtro, el radar y los
+           iconos se actualizan solos. El orden de 'pipeline' es el de ETAPAS.
+           ========================================================================= */
+        const ETAPAS = ['Ingesta', 'Limpieza y validación', 'Modelado', 'Visualización', 'Despliegue'];
+
+        const PROYECTOS = [
+          {
+            id: 'fever',
+            nombre: 'Fever-Lens',
+            color: '#ff8fa3',
+            relleno: 'rgba(255, 143, 163, 0.2)',
+            pipeline: [95, 90, 85, 90, 50],
+            stack: [
+              { clase: 'fa-solid fa-table-cells', label: 'Google Sheets', color: '#34A853' },
+              { clase: 'fa-solid fa-database',    label: 'SQL',           color: '#8a9bb5' },
+              { clase: 'devicon-python-plain colored', label: 'Python' },
+              { svg: 'powerbi',                   label: 'Power BI' },
+              { clase: 'fa-brands fa-aws',        label: 'AWS Cloud',     color: '#FF9900' }
+            ]
+          },
+          {
+            id: 'bienestar',
+            nombre: 'Bienestar Vascular',
+            color: '#c9a0dc',
+            relleno: 'rgba(201, 160, 220, 0.2)',
+            pipeline: [40, 45, 60, 55, 95],
+            stack: [
+              { clase: 'fa-solid fa-robot',      label: 'IA Generativa',        color: '#c9a0dc' },
+              { clase: 'fa-solid fa-hard-drive', label: 'Local Storage',        color: '#8a9bb5' },
+              { clase: 'fa-solid fa-file-csv',   label: 'Data Export (CSV/PDF)', color: '#34A853' },
+              { clase: 'fa-brands fa-chrome',    label: 'Chrome Web Store',     color: '#4285F4' }
+            ]
+          }
+        ];
+
+        const POWERBI_SVG = '<svg class="custom-svg" viewBox="0 0 2048 2048" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill="#F2C811" d="M896 512v1536H384V512h512z"/><path fill="#D2A400" d="M1536 0v2048h-512V0h512z"/><path fill="#E6B600" d="M2048 1024v1024h-512V1024h512z"/></svg>';
+
+        let filtroActivo = 'todos';
+        let skillsChartInstance = null;
+        const filterBar = document.getElementById('filter-bar');
+        const toolsGrid = document.getElementById('tools-grid');
+
+        function iconoHTML(item) {
+          if (item.svg === 'powerbi') {
+            return '<div class="tool-icon" title="' + item.label + '" role="img" aria-label="' + item.label + '">' + POWERBI_SVG + '</div>';
+          }
+          const color = item.color ? ' style="color:' + item.color + ';"' : '';
+          return '<i class="' + item.clase + ' tool-icon" title="' + item.label + '" role="img" aria-label="' + item.label + '"' + color + '></i>';
+        }
+
+        function renderStack() {
+          const visibles = (filtroActivo === 'todos') ? PROYECTOS : PROYECTOS.filter(p => p.id === filtroActivo);
+          const conTitulo = visibles.length > 1;   // solo etiqueta los grupos si hay más de uno
+          toolsGrid.innerHTML = visibles.map(p =>
+            '<div class="stack-group">' +
+              (conTitulo ? '<span class="stack-group-title">' + p.nombre + '</span>' : '') +
+              '<div class="stack-icons">' + p.stack.map(iconoHTML).join('') + '</div>' +
+            '</div>'
+          ).join('');
+        }
+
+        function renderFiltros() {
+          const opciones = [{ id: 'todos', nombre: 'Todos' }].concat(PROYECTOS);
+          filterBar.innerHTML = opciones.map(o => {
+            const activo = (o.id === filtroActivo);
+            const punto = o.color ? '<span class="dot-legend" style="background:' + o.color + '"></span>' : '';
+            return '<button class="filter-btn' + (activo ? ' active' : '') + '" data-filtro="' + o.id + '" aria-pressed="' + activo + '">' + punto + o.nombre + '</button>';
+          }).join('');
+          filterBar.querySelectorAll('.filter-btn').forEach(b => {
+            b.addEventListener('click', () => aplicarFiltro(b.dataset.filtro));
+          });
+        }
+
+        function aplicarFiltro(id) {
+          filtroActivo = id;
+          renderFiltros();
+          renderStack();
+          if (skillsChartInstance) {
+            skillsChartInstance.data.datasets.forEach((ds, i) => {
+              ds.hidden = (filtroActivo !== 'todos' && PROYECTOS[i].id !== filtroActivo);
+            });
+            skillsChartInstance.update();
+          }
+        }
+
+        /* ---------- Efecto de escritura ---------- */
         const textArray = ["Storytelling de Datos.", "Limpieza y Modelado.", "Optimización de KPIs."];
         let textIndex = 0; let charIndex = 0;
         const typedTextElement = document.getElementById("typed-text");
@@ -550,7 +652,6 @@
             const btn = document.querySelector('.run-btn');
             const result = document.getElementById('sql-result');
             btn.innerHTML = 'Ejecutando... <i class="fa-solid fa-spinner fa-spin"></i>';
-            
             setTimeout(() => {
                 btn.style.display = 'none';
                 result.classList.add('show');
@@ -560,7 +661,6 @@
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
-        let skillsChartInstance = null;
 
         function applyChartTheme(isLight) {
             if (!skillsChartInstance) return;
@@ -574,7 +674,6 @@
             skillsChartInstance.update();
         }
 
-        // El tema ya se aplicó en el <head>; aquí solo sincronizamos el icono del botón.
         if (htmlElement.getAttribute('data-theme') === 'light') {
             themeIcon.classList.replace('fa-sun', 'fa-moon');
         }
@@ -585,9 +684,7 @@
             const counters = document.querySelectorAll('.counter');
             counters.forEach(counter => {
                 const target = parseFloat(counter.getAttribute('data-target'));
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                
+                const increment = target / (2000 / 16);
                 let current = 0;
                 const updateCounter = () => {
                     current += increment;
@@ -598,12 +695,8 @@
                         counter.innerText = target;
                     }
                 };
-                
                 const observer = new IntersectionObserver(entries => {
-                    if(entries[0].isIntersecting) {
-                        updateCounter();
-                        observer.disconnect();
-                    }
+                    if(entries[0].isIntersecting) { updateCounter(); observer.disconnect(); }
                 });
                 observer.observe(counter);
             });
@@ -618,27 +711,16 @@
             skillsChartInstance = new Chart(ctx, {
                 type: 'radar',
                 data: {
-                    labels: ['Ingesta', 'Limpieza y validación', 'Modelado', 'Visualización', 'Despliegue'],
-                    datasets: [
-                        {
-                            label: 'Fever-Lens',
-                            data: [95, 90, 85, 90, 50],
-                            backgroundColor: 'rgba(255, 143, 163, 0.2)',
-                            borderColor: '#ff8fa3',
-                            pointBackgroundColor: '#ff8fa3',
-                            pointBorderColor: '#fff',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Bienestar Vascular',
-                            data: [40, 45, 60, 55, 95],
-                            backgroundColor: 'rgba(201, 160, 220, 0.2)',
-                            borderColor: '#c9a0dc',
-                            pointBackgroundColor: '#c9a0dc',
-                            pointBorderColor: '#fff',
-                            borderWidth: 2
-                        }
-                    ]
+                    labels: ETAPAS,
+                    datasets: PROYECTOS.map(p => ({
+                        label: p.nombre,
+                        data: p.pipeline,
+                        backgroundColor: p.relleno,
+                        borderColor: p.color,
+                        pointBackgroundColor: p.color,
+                        pointBorderColor: '#fff',
+                        borderWidth: 2
+                    }))
                 },
                 options: {
                     scales: {
@@ -655,11 +737,15 @@
                         legend: {
                             display: true,
                             position: 'bottom',
+                            onClick: function() { /* desactivado: manda el filtro de arriba */ },
                             labels: { color: initText, padding: 15, usePointStyle: true, font: { size: 13 } }
                         }
                     }
                 }
             });
+
+            renderFiltros();
+            renderStack();
         });
 
         tsParticles.load("tsparticles", {
@@ -683,7 +769,6 @@
 
         themeToggleBtn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
-            
             if (currentTheme === 'light') {
                 htmlElement.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
