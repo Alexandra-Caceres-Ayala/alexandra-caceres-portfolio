@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Caso de estudio: EVOLUCIÓN, un observatorio diario del ecosistema del dato en español que se publica solo. Pipeline, decisiones técnicas y métricas reales.">
+    <title>Caso de estudio · EVOLUCIÓN | Alexandra Cáceres</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:url" content="https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/caso-evolucion.html">
+    <meta property="og:site_name" content="Alexandra Cáceres · Portafolio">
+    <meta property="og:title" content="Caso de estudio · EVOLUCIÓN: el observatorio que se publica solo">
+    <meta property="og:description" content="Cómo construí y opero una plataforma editorial diaria sobre el ecosistema del dato, con coste de operación cercano a cero. Pipeline, decisiones y métricas reales.">
+    <meta property="og:image" content="https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/og-portada.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Portada del portafolio de Alexandra Cáceres, Data Analyst">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script>
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Outfit:wght@300;400;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #171020;
+            --primary: #ff8fa3;
+            --secondary: #c9a0dc;
+            --text-main: #d8c3d6;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --terminal-bg: #0d0914;
+            --term-text: #a9b7c6;
+            --term-dim: #8a8a8a;
+            --term-keyword: #cc7832;
+            --term-string: #6a8759;
+            --term-prompt: #ff8fa3;
+            --term-header-bg: rgba(0, 0, 0, 0.2);
+            --term-shadow: rgba(0, 0, 0, 0.5);
+            --panel-bg: #0b0710;
+            --btn-hover-bg: rgba(255, 255, 255, 0.1);
+            --th-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f6f3fa;
+            --primary: #e85d7b;
+            --secondary: #9a6bb3;
+            --text-main: #4a4052;
+            --text-light: #171020;
+            --glass-bg: rgba(0, 0, 0, 0.03);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --terminal-bg: #e2daeb;
+            --term-text: #3b3443;
+            --term-dim: #5a5466;
+            --term-keyword: #a8410f;
+            --term-string: #2e5c1f;
+            --term-prompt: #b02a4a;
+            --term-header-bg: rgba(0, 0, 0, 0.06);
+            --term-shadow: rgba(74, 64, 82, 0.18);
+            --panel-bg: #e8e3ef;
+            --btn-hover-bg: rgba(0, 0, 0, 0.05);
+            --th-bg: rgba(0, 0, 0, 0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .theme-toggle-btn {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            color: var(--text-light); width: 45px; height: 45px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            backdrop-filter: blur(10px); transition: all 0.3s ease; font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .theme-toggle-btn:hover { transform: scale(1.1) rotate(15deg); color: var(--primary); border-color: var(--primary); }
+
+        .container { max-width: 880px; margin: 0 auto; padding: 60px 30px 80px 30px; }
+
+        .back-link {
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 45px;
+            color: var(--text-main); text-decoration: none; font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover { color: var(--primary); }
+
+        .kicker {
+            font-family: 'Fira Code', monospace; font-size: 13px; letter-spacing: 2px;
+            color: var(--secondary); margin-bottom: 18px;
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif; font-size: clamp(34px, 5vw, 52px);
+            color: var(--text-light); line-height: 1.15; letter-spacing: -1px; margin-bottom: 20px;
+            transition: color 0.4s ease;
+        }
+        h1 span { background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .lead { font-size: 18px; line-height: 1.8; font-weight: 300; margin-bottom: 25px; }
+
+        .tech-chips { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
+        .chip { color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 13px; border: 1px solid rgba(255, 143, 163, 0.2); }
+
+        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn {
+            padding: 11px 20px; border-radius: 12px; font-size: 13px; font-weight: 600;
+            text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+        }
+        .btn-glow { background: linear-gradient(90deg, var(--primary), #e56b82); color: #fff; border: none; box-shadow: 0 0 20px rgba(255, 143, 163, 0.4); }
+        .btn-glow:hover { box-shadow: 0 0 30px rgba(255, 143, 163, 0.6); transform: translateY(-3px); }
+        .btn-glass { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-light); backdrop-filter: blur(10px); }
+        .btn-glass:hover { background: var(--btn-hover-bg); transform: translateY(-3px); color: var(--primary); border-color: var(--primary); }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 26px; color: var(--text-light);
+            margin: 60px 0 22px 0; transition: color 0.4s ease;
+        }
+
+        .glass-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(20px);
+            border-radius: 20px; padding: 32px 36px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .glass-card p { font-size: 15px; line-height: 1.8; }
+        .glass-card p + p { margin-top: 14px; }
+
+        ul.puntos { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        ul.puntos li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.7; }
+        ul.puntos li::before { content: "▸"; position: absolute; left: 0; color: var(--primary); }
+
+        .flow { display: flex; flex-direction: column; gap: 22px; }
+        .step { display: flex; gap: 18px; align-items: flex-start; }
+        .step-num {
+            flex: 0 0 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff;
+        }
+        .step h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: var(--text-light); margin-bottom: 6px; transition: color 0.4s ease; }
+        .step p { font-size: 15px; line-height: 1.7; }
+        .mono { font-family: 'Fira Code', monospace; font-size: 13px; color: var(--secondary); }
+
+        .code-excerpt {
+            background: var(--terminal-bg); border: 1px solid var(--glass-border); border-radius: 12px;
+            padding: 22px 24px; font-family: 'Fira Code', monospace; font-size: 13px; line-height: 1.8;
+            color: var(--term-text); overflow-x: auto; box-shadow: 0 20px 50px var(--term-shadow);
+            transition: background-color 0.4s ease;
+        }
+        .code-excerpt .k { color: var(--secondary); }
+        .code-excerpt .s { color: var(--term-string); }
+        .code-excerpt .dim { color: var(--term-dim); }
+
+        .evidence-img { width: 100%; border-radius: 16px; border: 1px solid var(--glass-border); display: block; margin-top: 25px; }
+        figcaption { font-size: 13px; color: var(--term-dim); margin-top: 10px; text-align: center; }
+
+        .incident { border-left: 3px solid var(--secondary); }
+
+        .sql-terminal {
+            background: var(--terminal-bg); border: 1px solid var(--glass-border); border-radius: 12px;
+            overflow: hidden; font-family: 'Fira Code', monospace; font-size: 14px;
+            box-shadow: 0 20px 50px var(--term-shadow);
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+        .terminal-header {
+            background: var(--term-header-bg); padding: 10px 16px; display: flex; align-items: center; gap: 8px;
+            font-size: 12px; color: var(--term-dim);
+        }
+        .terminal-header .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .terminal-body { padding: 20px; color: var(--term-text); transition: color 0.4s ease; }
+        .prompt { color: var(--term-prompt); font-weight: 600; }
+        .keyword { color: var(--term-keyword); }
+        .rows-note { margin-top: 10px; color: var(--term-string); transition: color 0.4s ease; }
+        .term-cursor { display: inline-block; width: 8px; height: 15px; background: var(--term-text); animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .table-scroll { overflow-x: auto; }
+        .sql-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+        .sql-table th, .sql-table td { border: 1px solid rgba(128,128,128,0.3); padding: 7px 10px; text-align: left; }
+        .sql-table th { background: var(--th-bg); color: var(--secondary); }
+
+        .decisiones { display: flex; flex-direction: column; gap: 18px; }
+        .decisiones p { font-size: 15px; line-height: 1.8; }
+        .decisiones strong { color: var(--text-light); font-weight: 600; }
+
+        footer { margin-top: 70px; text-align: center; font-size: 13px; color: var(--term-dim); }
+
+        @media (max-width: 700px) {
+            .container { padding: 40px 20px 60px 20px; }
+            .glass-card { padding: 26px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambiar tema">
+        <i class="fa-solid fa-sun" id="theme-icon"></i>
+    </button>
+
+    <div class="container">
+        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver al portafolio</a>
+
+        <p class="kicker">CASO DE ESTUDIO · DATA PIPELINE EN PRODUCCIÓN</p>
+        <h1>EVOLUCIÓN: <span>el observatorio que se publica solo</span></h1>
+        <p class="lead">Cómo construí — y opero — una plataforma editorial diaria sobre el ecosistema del dato en español, con un coste de operación cercano a cero.</p>
+
+        <div class="tech-chips">
+            <span class="chip"><i class="fa-solid fa-robot" aria-hidden="true"></i> IA en modo desatendido</span>
+            <span class="chip"><i class="fa-brands fa-python" aria-hidden="true"></i> Python · pandas</span>
+            <span class="chip"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Altair</span>
+            <span class="chip"><i class="fa-brands fa-github" aria-hidden="true"></i> GitHub Actions &amp; Pages</span>
+            <span class="chip"><i class="fa-brands fa-markdown" aria-hidden="true"></i> Markdown</span>
+        </div>
+
+        <div class="btn-group">
+            <a href="https://alexandra-caceres-ayala.github.io/evolucion/" target="_blank" rel="noopener noreferrer" class="btn btn-glow">
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Ver la web
+            </a>
+            <a href="https://github.com/Alexandra-Caceres-Ayala/evolucion" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> Repositorio
+            </a>
+        </div>
+
+        <h2>El problema</h2>
+        <div class="glass-card">
+            <p>Mantenerse al día del ecosistema del dato en español significa revisar decenas de fuentes cada mañana: lanzamientos, actualizaciones de herramientas, movimientos del sector. Quería un observatorio diario y riguroso — pero era una sola persona, cursando un bootcamp intensivo de análisis de datos en paralelo.</p>
+            <p>Así que la pregunta de diseño no fue «¿puedo publicar un boletín?», sino: <strong style="color: var(--text-light);">¿puede existir un medio diario cuyo coste de operación sea cercano a cero?</strong></p>
+        </div>
+
+        <h2>Los requisitos que me impuse</h2>
+        <div class="glass-card">
+            <ul class="puntos">
+                <li>Rigor: cada noticia con su fuente verificada y enlazada.</li>
+                <li>Cadencia diaria sostenible en el tiempo — sin depender de mi disponibilidad.</li>
+                <li>Archivo completo consultable: buscador, RSS y etiquetas por herramienta.</li>
+                <li>Coste recurrente ≈ 0, en dinero y en horas.</li>
+                <li>Sin dependencia de plataformas: Git + Markdown como única fuente de verdad.</li>
+            </ul>
+        </div>
+
+        <h2>El pipeline, de la fuente al lector</h2>
+        <div class="glass-card">
+            <div class="flow">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Ingesta y redacción</h3>
+                        <p>Un agente de IA en modo desatendido se lanza solo cada mañana: recopila las noticias del día y redacta el borrador, con su fuente verificada en cada pieza. <span class="mono">→ boletines-crudos/</span></p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Curación editorial</h3>
+                        <p>Del crudo al definitivo: estructura, etiquetas y criterio. El resultado es un archivo Markdown por edición — la única fuente de verdad del sistema. <span class="mono">→ boletines/</span></p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Procesamiento</h3>
+                        <p>Python normaliza el contenido y extrae las etiquetas por herramienta. <span class="mono">importar_boletin.py</span></p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div>
+                        <h3>Análisis y visualización</h3>
+                        <p>pandas cuenta menciones por herramienta y Altair dibuja el ranking y su tendencia en el tiempo, adaptado a tema claro y oscuro. <span class="mono">graficos.py</span></p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div>
+                        <h3>Publicación</h3>
+                        <p>El sitio estático se regenera con SEO, RSS y sitemap, se sube por la API de GitHub y GitHub Actions lo despliega en Pages. Cero pasos manuales. <span class="mono">generate_site.py · seo.py · subir_boletin_github.py</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>La evidencia</h2>
+        <div class="glass-card">
+            <p style="margin-bottom: 18px;">Cada edición es un archivo Markdown con metadatos estructurados. Este es el encabezado real del boletín del 22 de julio de 2026:</p>
+            <div class="code-excerpt">
+<span class="dim">---</span>
+<br><span class="k">titulo:</span> <span class="s">"Boletín Diario de Data Analytics — 22 de julio de 2026"</span>
+<br><span class="k">fecha:</span> 2026-07-22
+<br><span class="k">etiquetas:</span> [python, sql, power-bi, tableau, snowflake, databricks, duckdb, polars, pandas, spark, ia]
+<br><span class="k">autor:</span> <span class="s">"Alexandra Cáceres Ayala"</span>
+<br><span class="dim">---</span>
+<br><span class="dim">## 1. Noticias Destacadas en España y Europa</span>
+<br>- <strong style="color: var(--term-text);">Microsoft y Mistral amplían su alianza para impulsar la IA soberana en Europa.</strong> … <span class="s">[Fuente]</span>
+            </div>
+            <figure style="margin: 0;">
+                <img src="evolucion_grafico.png" alt="Panel interactivo de menciones y tendencias por herramienta de EVOLUCIÓN" class="evidence-img" loading="lazy">
+                <figcaption>El panel de menciones y tendencias por herramienta — se recalcula automáticamente con cada edición.</figcaption>
+            </figure>
+        </div>
+
+        <h2>Cuatro decisiones técnicas, contadas</h2>
+        <div class="glass-card">
+            <div class="decisiones">
+                <p><strong>1 · Markdown en Git como base de datos.</strong> ¿Por qué no una base de datos convencional? Porque un archivo de texto versionado da historial gratis, portabilidad total y cero mantenimiento. Para un archivo editorial, la simplicidad es una decisión de arquitectura, no una carencia.</p>
+                <p><strong>2 · IA desatendida, criterio humano.</strong> El agente redacta cada mañana, pero el sistema le exige una fuente verificable por noticia y la línea editorial está definida por mí. La calidad no se delega: se diseña el proceso para protegerla.</p>
+                <p><strong>3 · Carga diferida del gráfico (~800 KB).</strong> La librería de visualización pesaba ~800 KB y se descargaba en cada visita, la viera el lector o no. La convertí a carga diferida: solo se descarga al desplegar el panel. Un archivo diario debe ser ligero antes que lucido.</p>
+                <p><strong>4 · Automatizar lo recurrente para proteger lo importante.</strong> El ciclo diario no me cuesta horas: me cuesta supervisión. El tiempo liberado va donde más rinde — el análisis y mi formación.</p>
+            </div>
+        </div>
+
+        <h2>Lo que se rompió (y qué aprendí)</h2>
+        <div class="glass-card incident">
+            <p>El estreno no fue perfecto. El primer despliegue destapó bugs en el importador, que hubo que corregir sobre la marcha. Y tras un rediseño visual, los lectores seguían viendo la versión antigua del sitio: la caché servía el CSS viejo. De ahí aprendí a versionar los assets (<em>cache-busting</em>).</p>
+            <p>Un sistema en producción se termina de depurar en producción. Lo importante no es que nada falle nunca — es que el arreglo llegue antes que la siguiente edición. Todo el historial está público en el repositorio.</p>
+        </div>
+
+        <h2>Resultados</h2>
+        <div class="sql-terminal">
+            <div class="terminal-header">
+                <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                <span>evolucion — métricas — en vivo</span>
+            </div>
+            <div class="terminal-body">
+                <p><span class="prompt">sql&gt;</span> <span class="keyword">SELECT</span> metrica, valor</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FROM</span> evolucion.resultados;</p>
+                <div class="table-scroll">
+                    <table class="sql-table">
+                        <thead>
+                            <tr><th>metrica</th><th>valor</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Edición diaria</td><td>Ininterrumpida desde el 14 · jul · 2026</td></tr>
+                            <tr><td>Pasos manuales del ciclo diario</td><td>0</td></tr>
+                            <tr><td>Suscriptores del resumen semanal</td><td>68 en su primera semana</td></tr>
+                            <tr><td>Distribución</td><td>Web con buscador · RSS · newsletter en LinkedIn</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="rows-note">4 rows in set — métricas vivas: crecen con cada edición</p>
+                <p style="margin-top: 10px;"><span class="prompt">sql&gt;</span> <span class="term-cursor"></span></p>
+            </div>
+        </div>
+
+        <h2>Compromiso y siguiente iteración</h2>
+        <div class="glass-card">
+            <ul class="puntos">
+                <li><strong style="color: var(--text-light);">Compromiso vigente:</strong> edición diaria automatizada y resumen semanal en LinkedIn, con supervisión continua del sistema.</li>
+                <li><strong style="color: var(--text-light);">Roadmap — dataset abierto:</strong> publicar el CSV de menciones por herramienta y fecha, descargable, para que cualquiera pueda analizarlo. El observatorio, convertido también en fuente de datos.</li>
+            </ul>
+        </div>
+
+        <h2>Lo que este proyecto demuestra</h2>
+        <div class="glass-card">
+            <p>Diseño de pipelines, automatización de extremo a extremo, criterio editorial y medición honesta. Es, en pequeño, mi manera de trabajar: entender el problema, montar el sistema, medirlo — y contarlo.</p>
+            <div class="btn-group" style="margin-top: 22px;">
+                <a href="https://alexandra-caceres-ayala.github.io/evolucion/" target="_blank" rel="noopener noreferrer" class="btn btn-glow">
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Ver la web
+                </a>
+                <a href="https://github.com/Alexandra-Caceres-Ayala/evolucion" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i> Repositorio
+                </a>
+                <a href="index.html" class="btn btn-glass">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver al portafolio
+                </a>
+            </div>
+        </div>
+
+        <footer>© 2026 · Alexandra Cáceres Ayala — Data Analyst</footer>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const rootEl = document.documentElement;
+
+        if (rootEl.getAttribute('data-theme') === 'light') {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isLight = rootEl.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                rootEl.removeAttribute('data-theme');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+            } else {
+                rootEl.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                try { localStorage.setItem('theme', 'light'); } catch (e) {}
+            }
+        });
+    </script>
+</body>
+</html>
