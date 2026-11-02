@@ -136,7 +136,7 @@
             overflow: hidden; display: flex; justify-content: center; align-items: center; position: relative;
         }
         .profile-frame img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+            width: 100%; height: 100%; object-fit: cover; object-position: center 75%;
             filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.6));
             image-rendering: -webkit-optimize-contrast; image-rendering: high-quality;
             transform: translateZ(0); backface-visibility: hidden;
@@ -348,7 +348,7 @@
                     <span id="typed-text"></span><span class="cursor">&nbsp;</span>
                 </div>
 
-                <p>Analista de Datos con SQL, Python y Power BI. Transformo datos en información clara y visualizaciones que facilitan la toma de decisiones. Mi experiencia de más de cuatro años en operaciones —producción, hostelería, retail y comunicación— me permite comprender el contexto del negocio detrás de cada métrica.</p>
+                <p>Me interesa convertir los datos en información clara y útil para la toma de decisiones. Combino mi formación en análisis de datos con más de tres años de experiencia en distintos entornos operativos y de negocio, donde he trabajado de cerca con procesos, indicadores de rendimiento (KPIs) y control de calidad. Mi objetivo es aplicar estas competencias para ayudar a las empresas a comprender mejor sus datos y detectar oportunidades de mejora.</p>
 
                 <div class="btn-group">
                     <a href="mailto:alexandraaca7@gmail.com" class="btn btn-glow">
@@ -360,15 +360,12 @@
                     <a href="https://github.com/alexandra-caceres-ayala" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
                         <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
                     </a>
-                    <a href="https://www.notion.so/PROYECTOS-POWERBI-360690ad9fd180e699d1c6a4dac3bc7d?source=copy_link" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
-                        <i class="devicon-notion-plain" aria-hidden="true"></i> Notion
-                    </a>
                 </div>
             </div>
 
             <div class="hero-image-container">
                 <div class="profile-frame">
-                    <img src="perfil.png" alt="Fotografía de Alexandra Cáceres" loading="eager" fetchpriority="high">
+                    <img src="perfil.png?v=2" alt="Fotografía de Alexandra Cáceres" loading="eager" fetchpriority="high">
                 </div>
             </div>
         </header>
@@ -376,7 +373,7 @@
         <main>
             <section class="tools-section">
                 <h2 class="section-title with-sub">Mi Ecosistema de Datos</h2>
-                <p class="section-sub">El progreso de cada proyecto en las cinco etapas de un pipeline de datos — en desarrollo, publicado o en producción diaria. Filtra para verlos por separado.</p>
+                <p class="section-sub">El progreso de cada proyecto en las cinco etapas de un pipeline de datos — en mejora continua, publicado o en producción diaria. Filtra para verlos por separado.</p>
 
                 <div class="stack-grid">
                     <div class="chart-container">
@@ -415,7 +412,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr><td>Fever-Lens</td><td>SQL · Python · Power BI</td><td>Prototipo validado · fase SQL</td><td>En desarrollo</td></tr>
+                                            <tr><td>Fever-Lens</td><td>MySQL · Python · Power BI</td><td>42,4M filas · 4 hallazgos</td><td>Mejora continua</td></tr>
                                             <tr><td>EVOLUCIÓN</td><td>Python · IA · GitHub Actions</td><td>Publicación diaria autónoma</td><td>En producción</td></tr>
                                             <tr><td>Bienestar Vascular</td><td>IA Generativa · PWA</td><td>Export CSV/PDF · ES/EN</td><td>En Chrome Web Store</td></tr>
                                         </tbody>
@@ -434,55 +431,37 @@
 
                 <div class="glass-card">
                     <div class="project-info">
-                        <span class="project-tag">Data Pipeline &amp; Machine Learning</span>
-                        <h3 class="project-title">Proyecto Fever-Lens</h3>
+                        <span class="project-tag">Análisis de Datos End-to-End</span>
+                        <h3 class="project-title">Fever-Lens · Inversión en Eventos Culturales</h3>
                         <p class="project-desc">
-                            Pipeline de datos de punta a punta para optimizar la inversión publicitaria en eventos masivos. Proyecto en desarrollo: la lógica de negocio (ROAS y CPA) está prototipada y validada en Google Sheets, y actualmente estoy en la fase SQL, uniendo 2,3M de filas de datasets de comportamiento de usuario. Próximas fases: análisis de correlaciones y modelo de ocupación en Python, y dashboard final en Power BI sobre modelo dimensional.
+                            Análisis de punta a punta para decidir dónde invertir el presupuesto publicitario de eventos culturales sin abandonar las ciudades con recintos infrautilizados: de 10 recintos analizados, 4 no tienen un solo evento. Integré tres fuentes —catálogo en Google Sheets, 42,4 millones de interacciones de Kaggle y renta del INE— en un modelo en estrella en MySQL, y analicé el embudo real en Python: el ROAS del catálogo ignora la demanda y, al corregirlo, 3 de 6 eventos cambian de puesto; de 08:00 a 13:00 se compra 2,26 veces más que por la tarde; y la renta no explica dónde hay oferta cultural (r = 0,535). Cierro con un dashboard en Power BI y métricas DAX.
                         </p>
                         <div class="tech-chips">
                             <span class="chip"><i class="fa-solid fa-table-cells" aria-hidden="true"></i> Google Sheets</span>
-                            <span class="chip"><i class="fa-solid fa-database" aria-hidden="true"></i> SQL</span>
-                            <span class="chip"><i class="devicon-python-plain" aria-hidden="true"></i> Python</span>
-                            <span class="chip"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Power BI</span>
-                            <span class="chip"><i class="fa-brands fa-aws" aria-hidden="true"></i> AWS Cloud</span>
+                            <span class="chip"><i class="fa-solid fa-database" aria-hidden="true"></i> MySQL</span>
+                            <span class="chip"><i class="devicon-python-plain" aria-hidden="true"></i> Python · pandas</span>
+                            <span class="chip"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Power BI · DAX</span>
+                        </div>
+
+                        <div class="btn-group" style="margin-top: 25px;">
+                            <a href="Fever_Lens_Informe.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glow" style="padding: 10px 18px; font-size: 13px;">
+                                <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Informe Completo (PDF)
+                            </a>
+                            <a href="Fever_Lens_Presentacion.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="padding: 10px 18px; font-size: 13px;">
+                                <i class="fa-solid fa-display" aria-hidden="true"></i> Presentación (PDF)
+                            </a>
+                            <a href="Fever_Lens_Metricas_DAX.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-glass" style="padding: 10px 18px; font-size: 13px;">
+                                <i class="fa-solid fa-calculator" aria-hidden="true"></i> Métricas DAX (PDF)
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Dashboard de Power BI: se activará al terminar el proyecto. Para reactivarlo,
-                         quitar este comentario, poner el enlace público del informe en src y
-                         eliminar la terminal "fever_lens — pipeline" de abajo.
-                    <div class="dashboard-container">
-                        <iframe
-                            class="dashboard-iframe"
-                            title="Fever-Lens Dashboard"
-                            src="https://app.powerbi.com/view?r=eyJrIjoiX_PON_TU_LINK_AQUI_X_IiwidCI6IjkzYz... "
-                            allowFullScreen="true">
-                        </iframe>
-                    </div>
-                    -->
-                    <div class="sql-terminal">
-                        <div class="terminal-header">
-                            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-                            <span>fever_lens — pipeline — en curso</span>
+                    <div class="media-stack">
+                        <div class="dashboard-container image-mode">
+                            <img src="Fever_Lens_Portada.png" alt="Portada de Fever-Lens: 10 recintos analizados, 4 sin un solo evento programado" class="project-preview-img" loading="lazy" />
                         </div>
-                        <div class="terminal-body">
-                            <p><span class="prompt">sql&gt;</span> <span class="keyword">SELECT</span> fase, estado</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">FROM</span> fever_lens.pipeline;</p>
-                            <div class="table-scroll">
-                                <table class="sql-table">
-                                    <thead>
-                                        <tr><th>fase</th><th>estado</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>Lógica de negocio (Google Sheets)</td><td>✔ Validada</td></tr>
-                                        <tr><td>Unión y limpieza en SQL · 2,3M filas</td><td>► En curso</td></tr>
-                                        <tr><td>Análisis y modelo en Python</td><td>Pendiente</td></tr>
-                                        <tr><td>Dashboard en Power BI</td><td>Pendiente</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <p class="rows-note">4 rows in set — aquí se publicará el dashboard al cerrar la última fase</p>
-                            <p style="margin-top: 10px;"><span class="prompt">sql&gt;</span> <span class="term-cursor"></span></p>
+                        <div class="dashboard-container image-mode">
+                            <img src="Fever_Lens_ROAS.png" alt="Hallazgo principal de Fever-Lens: el ROAS reportado ignora la demanda — ajustado por la demanda real, 3 de 6 eventos cambian de puesto" class="project-preview-img" loading="lazy" />
                         </div>
                     </div>
 
@@ -571,17 +550,6 @@
                 <div class="experience-timeline">
                     <div class="experience-item">
                         <div class="experience-header">
-                            <h3>Gobernanta Suplente · Equipo de Housekeeping</h3>
-                            <span class="experience-company">Hotel Tobazo · Candanchú</span>
-                            <span class="experience-date">Dic. 2025 – Abr. 2026 · 5 meses</span>
-                        </div>
-                        <ul>
-                            <li>Formé parte del equipo de pisos de un hotel de estación de esquí, sosteniendo los estándares de calidad durante la temporada de máxima ocupación — en paralelo con mi formación intensiva en análisis de datos (Unicorn Academy).</li>
-                            <li>Asumí las funciones de la gobernanta en sus ausencias semanales: supervisé el trabajo de un equipo de 3 personas, verifiqué el estado de las habitaciones y consolidé el reporte diario con el que recepción cerraba la jornada.</li>
-                        </ul>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-header">
                             <h3>Personal de Producción</h3>
                             <span class="experience-company">Baxter International Inc.</span>
                             <span class="experience-date">Mar. 2024 – Oct. 2025 · 1 año 8 meses</span>
@@ -655,13 +623,13 @@
             nombre: 'Fever-Lens',
             color: '#ff8fa3',
             relleno: 'rgba(255, 143, 163, 0.2)',
-            pipeline: [60, 20, 5, 5, 0],
+            pipeline: [95, 90, 95, 90, 40],
             stack: [
               { clase: 'fa-solid fa-table-cells', label: 'Google Sheets', color: '#34A853' },
-              { clase: 'fa-solid fa-database',    label: 'SQL',           color: '#8a9bb5' },
-              { clase: 'devicon-python-plain colored', label: 'Python' },
-              { svg: 'powerbi',                   label: 'Power BI' },
-              { clase: 'fa-brands fa-aws',        label: 'AWS Cloud',     color: '#FF9900' }
+              { clase: 'fa-solid fa-database',    label: 'MySQL 8',       color: '#8a9bb5' },
+              { clase: 'devicon-python-plain colored', label: 'Python · pandas' },
+              { clase: 'fa-solid fa-chart-line',  label: 'matplotlib',    color: '#34A853' },
+              { svg: 'powerbi',                   label: 'Power BI · DAX' }
             ]
           },
           {

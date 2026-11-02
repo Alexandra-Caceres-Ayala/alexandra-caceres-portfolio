@@ -14,9 +14,6 @@
   <a href="mailto:alexandraaca7@gmail.com">
     <img src="https://img.shields.io/badge/Contáctame-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Correo Electrónico" />
   </a>
-  <a href="https://www.notion.so/PROYECTOS-POWERBI-360690ad9fd180e699d1c6a4dac3bc7d?source=copy_link">
-    <img src="https://img.shields.io/badge/Proyectos_en_Notion-000000?style=for-the-badge&logo=notion&logoColor=white" alt="Notion" />
-  </a>
 </div>
 
 <br />
@@ -25,7 +22,7 @@
 
 Este repositorio aloja el código fuente de mi portafolio: el sitio donde presento mis proyectos de datos y mi trayectoria profesional.
 
-Analista de Datos con SQL, Python y Power BI. Transformo datos en información clara y visualizaciones que facilitan la toma de decisiones. Mi experiencia de casi cuatro años en operaciones —producción, atención al cliente y retail— me permite comprender el contexto del negocio detrás de cada métrica.
+Me interesa convertir los datos en información clara y útil para la toma de decisiones. Combino mi formación en análisis de datos con más de tres años de experiencia en distintos entornos operativos y de negocio, donde he trabajado de cerca con procesos, indicadores de rendimiento (KPIs) y control de calidad. Mi objetivo es aplicar estas competencias para ayudar a las empresas a comprender mejor sus datos y detectar oportunidades de mejora.
 
 > **Estado:** Disponibilidad Inmediata · 100% Remoto 🌍
 
@@ -44,16 +41,39 @@ Analista de Datos con SQL, Python y Power BI. Transformo datos en información c
 
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 ![Markdown](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)
-![Notion](https://img.shields.io/badge/Notion-1a1a1a?style=for-the-badge&logo=notion&logoColor=white)
 ![IA Generativa](https://img.shields.io/badge/IA_Generativa-8A63D2?style=for-the-badge)
 
 ---
 
 ## 🚀 Análisis en Acción
 
+### 🎯 Fever-Lens · Inversión en Eventos Culturales
+
+> **Estado:** Mejora continua — entregado como proyecto final del bootcamp (agosto 2026), lo sigo ampliando.
+
+**[Informe completo (PDF)](https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/Fever_Lens_Informe.pdf)** · [Presentación (PDF)](https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/Fever_Lens_Presentacion.pdf) · [Métricas DAX (PDF)](https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/Fever_Lens_Metricas_DAX.pdf)
+
+Análisis de punta a punta (agosto 2026) para decidir dónde invertir el presupuesto publicitario de eventos culturales sin abandonar las ciudades con recintos infrautilizados: de 10 recintos analizados, 4 no tienen un solo evento. Integré tres fuentes —catálogo en Google Sheets, 42,4 millones de interacciones de Kaggle y renta del INE— en un modelo en estrella en MySQL (7 tablas y una vista), analicé el embudo en Python y cerré con un dashboard en Power BI y métricas DAX.
+
+Los cuatro hallazgos, verificados contra los datos:
+
+- El ROAS del catálogo (precio ÷ coste) no contiene demanda: al corregirlo con la conversión real, **3 de 6 eventos cambian de puesto**.
+- Cada evento se rompe en un punto distinto del embudo: el festival de jazz es el peor enganchando (4,74 %) y el mejor cerrando (80,8 %).
+- De 08:00 a 13:00 se compra **2,26 veces más** que de 16:00 a 20:00.
+- La renta no explica dónde hay oferta cultural (r = 0,535 · p = 0,111): mi hipótesis de partida era la contraria, y la descarté.
+
+<div align="center">
+  <img src="./Fever_Lens_Portada.png" width="75%" alt="Portada de Fever-Lens: 10 recintos analizados, 4 sin un solo evento programado" />
+  <img src="./Fever_Lens_ROAS.png" width="75%" alt="El ROAS reportado ignora la demanda: ajustado por la demanda real, 3 de 6 eventos cambian de puesto" />
+</div>
+
+`Google Sheets` · `MySQL` · `Python` · `pandas` · `Power BI` · `DAX`
+
+---
+
 ### 🔭 EVOLUCIÓN · Observatorio del Ecosistema del Dato
 
-**[Ver la web](https://alexandra-caceres-ayala.github.io/evolucion/)** · [Repositorio](https://github.com/Alexandra-Caceres-Ayala/evolucion) · [Newsletter semanal en LinkedIn](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7485707534079672322)
+**[Ver la web](https://alexandra-caceres-ayala.github.io/evolucion/)** · [Caso de estudio](https://alexandra-caceres-ayala.github.io/alexandra-caceres-portfolio/caso-evolucion.html) · [Repositorio](https://github.com/Alexandra-Caceres-Ayala/evolucion) · [Newsletter semanal en LinkedIn](https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7485707534079672322)
 
 Plataforma editorial que documenta a diario, en español, la evolución del ecosistema del dato. Funciona como un pipeline automatizado de extremo a extremo: cada mañana un agente de IA en modo desatendido redacta el boletín, lo sube mediante la API de GitHub y GitHub Actions reconstruye y publica el sitio en GitHub Pages, sin pasos manuales. El panel de menciones y tendencias por herramienta se genera con pandas y Altair, y el sitio incluye buscador, RSS y modo claro/oscuro.
 
@@ -81,16 +101,6 @@ La concebí y la llevé a producción, apoyándome en IA generativa para la impl
 </div>
 
 `IA generativa` · `Local Storage API` · `Export CSV/PDF` · `Chrome Web Store`
-
----
-
-### 🎯 Fever-Lens · Pipeline de datos end-to-end
-
-[Documentación en Notion](https://www.notion.so/PROYECTOS-POWERBI-360690ad9fd180e699d1c6a4dac3bc7d?source=copy_link)
-
-Análisis de punta a punta sobre datasets de comportamiento de usuario en eventos masivos: prototipé la lógica de negocio (ROAS y CPA) en Google Sheets, uní 2,3 millones de filas con SQL, analicé correlaciones y construí un modelo de ocupación en Python, y cerré con un dashboard en Power BI sobre un modelo dimensional en estrella.
-
-`Google Sheets` · `SQL` · `Python` · `Power BI` · `AWS Cloud`
 
 ---
 
