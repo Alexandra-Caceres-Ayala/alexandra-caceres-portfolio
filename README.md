@@ -22,9 +22,9 @@
 
 Este repositorio aloja el código fuente de mi portafolio: el sitio donde presento mis proyectos de datos y mi trayectoria profesional.
 
-Me interesa convertir los datos en información clara y útil para la toma de decisiones. Combino mi formación en análisis de datos con más de tres años de experiencia en distintos entornos operativos y de negocio, donde he trabajado de cerca con procesos, indicadores de rendimiento (KPIs) y control de calidad. Mi objetivo es aplicar estas competencias para ayudar a las empresas a comprender mejor sus datos y detectar oportunidades de mejora.
+Me apasiona convertir los datos en información clara y útil para la toma de decisiones. Combino mi formación en análisis de datos con más de tres años de experiencia en distintos entornos operativos y de negocio, donde he trabajado de cerca con procesos, indicadores de rendimiento (KPIs) y control de calidad. Mi objetivo es aplicar estas competencias para ayudar a las empresas a comprender mejor sus datos y detectar oportunidades de mejora.
 
-> **Estado:** Disponibilidad Inmediata · 100% Remoto 🌍
+> **Estado:** Disponibilidad Inmediata
 
 ---
 
